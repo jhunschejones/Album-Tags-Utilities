@@ -1,0 +1,5 @@
+# Album Tags Expired Data Utility
+
+This Node.js script uses the `request` module to check all albums in the album tags table against the Apple Music API. This assures that all stored data is still up to date with the most recent data being used by Apple. The script will alert the user to any expired data so that measures can be taken to update any stale information.
+
+While it is running, the script will also check for orphaned records in the Albums table. This helps reduce database bloat and can reveal unused data can be cleaned up to make future maintenance easier. The script is written to run against a local staging version of Album Tags codebase. This still allows me to connect to cloud databases while preventing confusion or performance degradation that could result from running the script against the live Prod or Staging versions of the app.

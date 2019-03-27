@@ -1,0 +1,15 @@
+{
+  "name": "album-tags-expired",
+  "version": "1.0.0",
+  "description": "checks album tags database for expired albums",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Joshua Hunsche Jones",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
