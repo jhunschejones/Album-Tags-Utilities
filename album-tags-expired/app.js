@@ -3,7 +3,6 @@ require('dotenv').config();
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr(process.env.ENCRYPT_KEY);
 const apiToken = cryptr.encrypt(process.env.API_TOKEN);
-console.log(apiToken)
 
 async function getAppleAlbumData(album) {
   const options = {
