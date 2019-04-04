@@ -10,6 +10,8 @@
   "author": "Joshua Hunsche Jones",
   "license": "MIT",
   "dependencies": {
+    "cryptr": "^4.0.2",
+    "dotenv": "^7.0.0",
     "request": "^2.88.0"
   }
 }

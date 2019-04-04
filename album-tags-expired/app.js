@@ -1,4 +1,9 @@
 const request = require('request');
+require('dotenv').config();
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.ENCRYPT_KEY);
+const apiToken = cryptr.encrypt(process.env.API_TOKEN);
+console.log(apiToken)
 
 async function getAppleAlbumData(album) {
   const options = {
@@ -22,6 +27,9 @@ async function getAppleAlbumData(album) {
 async function getAllAlbums() {
   const options = {
     url: 'http://localhost:3000/api/v1/album',
+    body: {
+      apiToken: apiToken
+    },
     json: true  
   };
 
