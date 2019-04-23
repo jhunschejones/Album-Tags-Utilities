@@ -275,19 +275,19 @@ requestPromise(options)
           title: userList.title,
           isPrivate: userList.isPrivate || false
         })
-        console.log(`-----\nList '${list[0].title}' created.`);
+        console.log(`-----\nList '${list.title}' created.`);
   
         for (let index = 0; index < userList.albums.length; index++) {
           let album = userList.albums[index];
           album = await getAppleAlbumData(album.appleAlbumID);
           let response = await addToList({
-            listID: list[0].id,
+            listID: list.id,
             album: album
           })
           if (response.message && response.message === "This album is already in this list.") {
-            console.log(`'${album.title}' is already in the '${list[0].title}' list.`);
+            console.log(`'${album.title}' is already in the '${list.title}' list.`);
           } else {
-            console.log(`'${album.title}' has been added to the list '${list[0].title}'`);
+            console.log(`'${album.title}' has been added to the list '${list.title}'`);
           }
         }
       }
