@@ -4,11 +4,12 @@ require 'httparty'
 require 'dotenv/load'
 
 USER_CONVERSION_HASH = {
-  "xxxxxx" => 123,
-  "xxxxxx" => 456
+  "" => 1,
+  "" => 2
 }
 
 @trouble_records = []
+@album_tag_count = 0
 
 def get_all_albums
   HTTParty.get("http://localhost:3000/api/v1/album",
@@ -86,9 +87,10 @@ def send_album_to_AT3(album)
     # === Associate tags to album ===
     album["tags"].each do |tag|
       HTTParty.post('http://localhost:4000/migrate/tag',
-        body: { text: tag[:text], user_id: tag[:user_id], custom_genre: tag[:custom_genre], album_id: album_id }.to_json,
+        body: { text: tag[:text], user_id: tag[:user_id], album_id: album_id }.to_json,
         headers: { 'Content-Type' => 'application/json' }
       )
+      @album_tag_count = @album_tag_count + 1
     end
   end
 
@@ -156,15 +158,17 @@ end
 all_albums = get_all_albums
 migrate_all_albums(all_albums)
 
-all_list_data = get_all_list_data(get_all_list_ids(all_albums))
-migrate_all_lists(all_list_data)
+# all_list_data = get_all_list_data(get_all_list_ids(all_albums))
+# migrate_all_lists(all_list_data)
 
-all_user_favorites = get_all_user_favorites
-migrate_all_user_favorites(all_user_favorites)
+# all_user_favorites = get_all_user_favorites
+# migrate_all_user_favorites(all_user_favorites)
 
 # finish progress meter
 puts '.'
 puts "\nMigration complete!\n"
+puts ''
+puts "album_tag count: #{@album_tag_count}"
 
 # report errors
 puts "REPORT: there was a problem with one or more albums: #{@trouble_records.join(", ")}" if @trouble_records.length > 0
